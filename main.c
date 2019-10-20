@@ -49,6 +49,24 @@ int main(void){
         printf("%d %f %f\n", i, data[i][0], kappa[i]);
     }
 
+    printf("file name >>>\n");
+    scanf("%s", file_name);
+    sprintf(file_name, "%s.csv", file_name);
+    if((fp = fopen(file_name, "w")) == NULL) {
+        perror("can't open file");
+        return -1;
+    }
+
+    //for(i=0; i<nnode; i++){
+    //    printf("%d , x = % 23.15e, radius = %23.15e\n",i, data[i][0], 1.0/rho[i]);
+    //}
+    fprintf(fp, "nnode, x, y, radius\n");
+    for(i=0; i<nnode; i++){
+        fprintf(fp, "%d, %23,15e, %23,15e, %23,15e\n", i, data[i][0], data[i][1], kappa[i]);
+    }
+
+    fclose(fp);
+
     free(kappa);
 
     return 0;
